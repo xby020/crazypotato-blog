@@ -5,5 +5,5 @@ export default defineNuxtConfig({
   typescript: {
     strict: true
   },
-  buildModules: ['nuxt-windicss']
+  buildModules: ['nuxt-windicss', '@vueuse/core/nuxt']
 });

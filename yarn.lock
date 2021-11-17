@@ -896,10 +896,25 @@
   resolved "https://registry.npmmirror.com/@vue/shared/download/@vue/shared-3.2.22.tgz?cache=0&sync_timestamp=1636948029190&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.2.22.tgz#26dcbe5e530f6c1f2de5ca9aeab92ab00f523b41"
   integrity sha512-qWVav014mpjEtbWbEgl0q9pEyrrIySKum8UVYjwhC6njrKzknLZPvfuYdQyVbApsqr94tf/3dP4pCuZmmjdCWQ==
 
+"@vueuse/core@^6.9.1":
+  version "6.9.1"
+  resolved "https://registry.npmmirror.com/@vueuse/core/download/@vueuse/core-6.9.1.tgz#b28ae875b618d3865c5a5ceefd9184b3155e8777"
+  integrity sha512-msa36DxnnbIu41bUTvfSudF6TL4wo0+Yrpw6yr1bFtwtYTOo8GZXYWPKyvXUVGhBBqrTVNTqsTtD0eXXHJ3roA==
+  dependencies:
+    "@vueuse/shared" "6.9.1"
+    vue-demi "*"
+
 "@vueuse/head@^0.6.0":
   version "0.6.0"
   resolved "https://registry.nlark.com/@vueuse/head/download/@vueuse/head-0.6.0.tgz#5584b1f724327cfce941c42efec9e590f5799329"
   integrity sha1-VYSx9yQyfPzpQcQu/snlkPV5kyk=
+
+"@vueuse/shared@6.9.1":
+  version "6.9.1"
+  resolved "https://registry.npmmirror.com/@vueuse/shared/download/@vueuse/shared-6.9.1.tgz#b5ac81da7cc5846a35dbc71ce7dfd4a78506a0d7"
+  integrity sha512-nQh+ayxkeCKUU9MZjyQpE7KfOb18e/QOHolOE2ZK5dpoHzCZK7MSXzgDtvb9omGkgK0mjXlLSJsVdGhG+QW7Aw==
+  dependencies:
+    vue-demi "*"
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -5169,6 +5184,11 @@ vue-bundle-renderer@^0.3.2:
   integrity sha1-a2cdoE8Ghboz3FX58YnSGqvMT/w=
   dependencies:
     bundle-runner "^0.0.1"
+
+vue-demi@*:
+  version "0.12.1"
+  resolved "https://registry.npmmirror.com/vue-demi/download/vue-demi-0.12.1.tgz?cache=0&sync_timestamp=1635960719282&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fvue-demi%2Fdownload%2Fvue-demi-0.12.1.tgz#f7e18efbecffd11ab069d1472d7a06e319b4174c"
+  integrity sha1-9+GO++z/0RqwadFHLXoG4xm0F0w=
 
 vue-loader@^16.8.3:
   version "16.8.3"
