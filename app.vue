@@ -1,7 +1,25 @@
 <template>
-  <div
-    class="w-screen h-screen flex justify-center items-center shadow-dark-100"
-  >
-    <div class="w-600px h-600px bg-green-300 rounded-lg"></div>
-  </div>
+  <n-config-provider :locale="zhCN" :date-locale="dateZhCN">
+    <n-loading-bar-provider>
+      <n-dialog-provider>
+        <n-notification-provider>
+          <n-message-provider>
+            <nuxt-page></nuxt-page>
+          </n-message-provider>
+        </n-notification-provider>
+      </n-dialog-provider>
+    </n-loading-bar-provider>
+  </n-config-provider>
 </template>
+
+<script lang="ts" setup>
+import {
+  dateZhCN,
+  zhCN,
+  NConfigProvider,
+  NDialogProvider,
+  NNotificationProvider,
+  NMessageProvider,
+  NLoadingBarProvider
+} from 'naive-ui';
+</script>
