@@ -1,5 +1,5 @@
 <template>
-  <div class="font-bold text-3xl">
+  <div class="font-bold text-3xl blur-sm">
     This is index page.
     <div>
       <nuxt-link to="/blog" v-slot="{ navigate }">
