@@ -1,5 +1,16 @@
 <template>
-  <div class="w-full h-64px flex flex-col justify-center px-2 primary">
+  <div
+    class="
+      w-full
+      h-64px
+      flex flex-col
+      justify-center
+      px-2
+      bg-background
+      shadow
+      blur
+    "
+  >
     <slot />
   </div>
 </template>

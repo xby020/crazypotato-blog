@@ -10,3 +10,9 @@
     </div>
   </div>
 </template>
+
+<script lang="ts">
+export default defineNuxtComponent({
+  layout: 'index'
+});
+</script>
