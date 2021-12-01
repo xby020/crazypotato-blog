@@ -7,12 +7,5 @@ export default defineNuxtConfig({
   buildModules: ['nuxt-windicss', '@vueuse/core/nuxt'],
   alias: {
     '@': './'
-  },
-  windicss: {
-    scan: {
-      dirs: ['./'],
-      exclude: ['node_modules', 'dist']
-    },
-    analyze: true
   }
 });

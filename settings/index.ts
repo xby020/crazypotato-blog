@@ -31,7 +31,7 @@ export const potatoTheme: potatoTheme = {
     light: {
       primary: '#2bbc8a',
       secondary: '#5e837b',
-      background: '#fefbf3',
+      background: '#f7f7f7',
       success: '#6de357',
       warning: '#f0ef41',
       error: '#cc4d4f',

@@ -1,5 +1,5 @@
 <template>
-  <div class="font-bold text-3xl blur-sm">
+  <div class="font-bold text-3xl">
     This is index page.
     <div>
       <nuxt-link to="/blog" v-slot="{ navigate }">
@@ -12,7 +12,5 @@
 </template>
 
 <script lang="ts">
-export default defineNuxtComponent({
-  layout: 'index'
-});
+export default defineNuxtComponent({});
 </script>
