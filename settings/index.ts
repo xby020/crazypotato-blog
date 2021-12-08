@@ -32,7 +32,7 @@ export const potatoTheme: potatoTheme = {
       primary: '#2bbc8a',
       secondary: '#5e837b',
       background: '#f7f7f7',
-      success: '#6de357',
+      success: '#4ce365',
       warning: '#f0ef41',
       error: '#cc4d4f',
       info: '#67c4d2'
@@ -41,7 +41,7 @@ export const potatoTheme: potatoTheme = {
       primary: '#2bbc8a',
       secondary: '#d5e4ce',
       background: '#282a35',
-      success: '#6de357',
+      success: '#4ce365',
       warning: '#f0ef41',
       error: '#cc4d4f',
       info: '#67c4d2'

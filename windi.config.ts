@@ -5,6 +5,7 @@ const { color } = potatoTheme;
 export default defineConfig({
   theme: {
     extend: {
+      // customize colors
       colors: {
         primary: {
           light: color.light.primary,
@@ -25,6 +26,9 @@ export default defineConfig({
         warning: color.light.warning,
         error: color.light.error,
         info: color.light.info
+      },
+      transitionTimingFunction: {
+        bounce: 'cubic-bezier(0.54, 1.55, 0.5, 1)'
       }
     }
   }
