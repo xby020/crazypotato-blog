@@ -15,6 +15,11 @@
     <div>
       <potato-switch></potato-switch>
     </div>
+
+    <potato-img
+      width="400px"
+      src="https://images.pexels.com/photos/1366957/pexels-photo-1366957.jpeg?cs=srgb&dl=pexels-irina-iriser-1366957.jpg&fm=jpg"
+    ></potato-img>
   </div>
 </template>
 
