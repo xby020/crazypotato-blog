@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full">
-    <potato-app-bar color="bg-background-dark" flat>
+    <potato-app-bar color="bg-background-dark" flat absolute>
       <div class="text-3xl font-extrabold">
         <span
           class="

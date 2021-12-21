@@ -12,7 +12,7 @@ interface potatoAppBarProps {
   dense?: boolean;
   flat?: boolean;
   absolute?: boolean;
-  transparent?: boolean;
+  transparent?: boolean | string | number;
   color?: string;
 }
 
