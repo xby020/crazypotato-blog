@@ -1,10 +1,11 @@
 <template>
   <div
     ref="targetImg"
-    :style="bgImg"
+    :style="styleConfig"
     class="bg-center bg-cover bg-no-repeat"
-    :class="classConfig"
-  ></div>
+  >
+    <div class="bg-hero-texture w-full h-full"></div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -29,8 +30,8 @@ const { src, width, height } = toRefs(props);
 const imgIsVisiable = ref(false);
 const targetImg = ref(null);
 // img width and height
-const imgWidth = ref<string | number>(width?.value || 0);
-const imgHeight = ref<string | number>(height?.value || 0);
+const imgWidth = ref<string | number>(width?.value || '100%');
+const imgHeight = ref<string | number>(height?.value || '100%');
 
 useIntersectionObserver(targetImg, ([{ isIntersecting }]) => {
   imgIsVisiable.value = isIntersecting;
@@ -40,26 +41,14 @@ const bgImg = `background-image:url(${src.value})`;
 
 // return class config
 const imgWidthClass = computed((): string => {
-  return `w-${imgWidth.value}`;
+  return `width:${imgWidth.value}`;
 });
 const imgHeightClass = computed((): string => {
-  return `w-${imgHeight.value}`;
+  return `height:${imgHeight.value}`;
 });
-const classConfig = computed((): string[] => {
-  return [imgWidthClass.value, imgHeightClass.value];
-});
-
-// init Img size
-onBeforeMount(() => {
-  // get image size
-  const imgDom = new Image();
-  imgDom.src = src.value;
-  imgDom.onload = () => {
-    if (!height?.value) {
-      // when height prop didn't set, use src height
-      imgHeight.value = `${imgDom.height}px`;
-    }
-  };
+// final style
+const styleConfig = computed((): string => {
+  return `${bgImg};${imgWidthClass.value};${imgHeightClass.value}`;
 });
 </script>
 

@@ -31,5 +31,16 @@ export default defineConfig({
         bounce: 'cubic-bezier(0.54, 1.55, 0.5, 1)'
       }
     }
-  }
+  },
+  plugins: [
+    require('@windicss/plugin-heropatterns')({
+      patterns: ['texture', 'signal'],
+      colors: {
+        default: '#2bbc8a'
+      },
+      opacity: {
+        default: '0.4'
+      }
+    })
+  ]
 });
