@@ -16,6 +16,8 @@
     <div>
       <potato-switch></potato-switch>
     </div>
+
+    <potato-slider></potato-slider>
   </div>
 </template>
 
