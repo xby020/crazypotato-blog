@@ -7,5 +7,6 @@
   "baseUrl": "./",
   "paths": {
     "@assets/*": ["./assets/*"]
-  }
+  },
+  "include": ["./.nuxt/nuxt.d.ts", "./**/*"]
 }
