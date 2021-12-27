@@ -1,222 +1,135 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
+import { Texture } from 'three';
 
 interface opts {
-  parent: any;
-  image1: string;
-  image2: string;
-  displacementImage: string;
-  intensity: number;
+  images: string[];
+  container: any;
 }
 
-export class Effect {
-  transitionIn(): void {}
-  transitionOut(): void {}
+export class transEffect {
+  switchById(id: number) {}
   constructor(opts: opts) {
-    var vertex = `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-    }
-    `;
+    // 工具常量
+    const vertex = `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }
+  `;
+    const fragment = `
+      
+      varying vec2 vUv;
 
-    var fragment = `
-    varying vec2 vUv;
-    uniform float dispFactor;
-    uniform float dpr;
-    uniform sampler2D disp;
-    uniform sampler2D texture1;
-    uniform sampler2D texture2;
-    uniform float angle1;
-    uniform float angle2;
-    uniform float intensity1;
-    uniform float intensity2;
-    uniform vec4 res;
-    uniform vec2 parent;
-    mat2 getRotM(float angle) {
-      float s = sin(angle);
-      float c = cos(angle);
-      return mat2(c, -s, s, c);
-    }
-    void main() {
-      vec4 disp = texture2D(disp, vUv);
-      vec2 dispVec = vec2(disp.r, disp.g);
-      vec2 uv = 0.5 * gl_FragCoord.xy / (res.xy) ;
-      vec2 myUV = (uv - vec2(0.5))*res.zw + vec2(0.5);
-      vec2 distortedPosition1 = myUV + getRotM(angle1) * dispVec * intensity1 * dispFactor;
-      vec2 distortedPosition2 = myUV + getRotM(angle2) * dispVec * intensity2 * (1.0 - dispFactor);
-      vec4 _texture1 = texture2D(texture1, distortedPosition1);
-      vec4 _texture2 = texture2D(texture2, distortedPosition2);
-      gl_FragColor = mix(_texture1, _texture2, dispFactor);
-    }
-    `;
+      uniform sampler2D currentImage;
+      uniform sampler2D nextImage;
 
-    var parent = opts.parent;
-    var dispImage = opts.displacementImage;
-    var image1 = opts.image1;
-    var image2 = opts.image2;
-    var imagesRatio = 1.0;
-    var intensity1 = 1;
-    var intensity2 = 1;
-    var commonAngle = 1; // 45 degrees by default, so grayscale images work correctl
-    var angle1 = commonAngle;
-    var angle2 = -commonAngle * 3;
-    var speedIn = 0.8;
-    var speedOut = 0.8;
-    var easing = 'expo.inOut';
+      uniform float dispFactor;
 
-    if (!parent) {
-      console.warn('Parent missing');
-      return;
-    }
+      void main() {
 
-    if (!(image1 && image2 && dispImage)) {
-      console.warn('One or more images are missing');
-      return;
-    }
+          vec2 uv = vUv;
+          vec4 _currentImage;
+          vec4 _nextImage;
+          float intensity = 0.3;
 
-    var scene = new THREE.Scene();
+          vec4 orig1 = texture2D(currentImage, uv);
+          vec4 orig2 = texture2D(nextImage, uv);
+          
+          _currentImage = texture2D(currentImage, vec2(uv.x, uv.y + dispFactor * (orig2 * intensity)));
+
+          _nextImage = texture2D(nextImage, vec2(uv.x, uv.y + (1.0 - dispFactor) * (orig1 * intensity)));
+
+          vec4 finalTexture = mix(_currentImage, _nextImage, dispFactor);
+
+          gl_FragColor = finalTexture;
+
+      }
+  `;
+    const renderW = 400;
+    const renderH = 300;
+
+    const { images, container } = opts;
+
+    // three renderer and loader
+    const renderer = new THREE.WebGLRenderer({
+      antialias: false
+    });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x23272a, 1.0);
+    renderer.setSize(renderW, renderH);
+    container.appendChild(renderer.domElement);
+
+    const loader = new THREE.TextureLoader();
+    loader.crossOrigin = 'anonymous';
+
+    // 处理 images 内每个图像
+    const sliderImages: Texture[] = [];
+    images.forEach((img) => {
+      const image = loader.load(img);
+      image.magFilter = image.minFilter = THREE.LinearFilter;
+      image.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      sliderImages.push(image);
+    });
+
+    // three scene
+    const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x23272a);
-    var camera = new THREE.OrthographicCamera(
-      parent.offsetWidth / -2,
-      parent.offsetWidth / 2,
-      parent.offsetHeight / 2,
-      parent.offsetHeight / -2,
+
+    let camera = new THREE.OrthographicCamera(
+      renderW / -2,
+      renderW / 2,
+      renderH / 2,
+      renderH / -2,
       1,
       1000
     );
-
     camera.position.z = 1;
 
-    var renderer = new THREE.WebGLRenderer({
-      antialias: false,
-      alpha: true
-    });
-
-    renderer.setPixelRatio(2.0);
-    renderer.setClearColor(0x23272a, 0.0);
-    renderer.setSize(parent.offsetWidth, parent.offsetHeight);
-    parent.appendChild(renderer.domElement);
-
-    var render = function () {
-      // This will be called by the TextureLoader as well as TweenMax.
-      renderer.render(scene, camera);
-    };
-
-    var loader = new THREE.TextureLoader();
-    loader.crossOrigin = 'anonymous';
-
-    var disp = loader.load(dispImage, render);
-    disp.magFilter = disp.minFilter = THREE.LinearFilter;
-
-    var texture1 = loader.load(image1, render);
-    var texture2 = loader.load(image2, render);
-
-    texture1.magFilter = texture2.magFilter = THREE.LinearFilter;
-    texture1.minFilter = texture2.minFilter = THREE.LinearFilter;
-
-    let a1, a2;
-    var imageAspect = imagesRatio;
-    if (parent.offsetHeight / parent.offsetWidth < imageAspect) {
-      a1 = 1;
-      a2 = parent.offsetHeight / parent.offsetWidth / imageAspect;
-    } else {
-      a1 = (parent.offsetWidth / parent.offsetHeight) * imageAspect;
-      a2 = 1;
-    }
-
-    var mat = new THREE.ShaderMaterial({
+    const mat = new THREE.ShaderMaterial({
       uniforms: {
-        intensity1: {
-          value: intensity1
-        },
-        intensity2: {
-          value: intensity2
-        },
-        dispFactor: {
-          value: 0.0
-        },
-        angle1: {
-          value: angle1
-        },
-        angle2: {
-          value: angle2
-        },
-        texture1: {
-          value: texture1
-        },
-        texture2: {
-          value: texture2
-        },
-        disp: {
-          value: disp
-        },
-        res: {
-          value: new THREE.Vector4(
-            parent.offsetWidth,
-            parent.offsetHeight,
-            a1,
-            a2
-          )
-        },
-        dpr: {
-          value: window.devicePixelRatio
-        }
+        dispFactor: { value: 0.0 },
+        currentImage: { value: sliderImages[0] },
+        nextImage: { value: sliderImages[1] }
       },
-
       vertexShader: vertex,
       fragmentShader: fragment,
       transparent: true,
       opacity: 1.0
     });
-
-    var geometry = new THREE.PlaneBufferGeometry(
-      parent.offsetWidth,
-      parent.offsetHeight,
+    const geometry = new THREE.PlaneBufferGeometry(
+      container.offsetWidth,
+      container.offsetHeight,
       1
     );
-    var object = new THREE.Mesh(geometry, mat);
+    const object = new THREE.Mesh(geometry, mat);
     object.position.set(0, 0, 0);
     scene.add(object);
 
-    function transitionIn() {
-      gsap.to(mat.uniforms.dispFactor, speedIn, {
+    let animate = function () {
+      requestAnimationFrame(animate);
+
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    // switch function
+    /**
+     * @description 按图片 index id 切换图片
+     *
+     * @param {number} id 图片id
+     */
+    this.switchById = function switchById(id: number): void {
+      mat.uniforms.nextImage.value = sliderImages[id];
+      gsap.to(mat.uniforms.dispFactor, 1, {
         value: 1,
-        ease: easing,
-        onUpdate: render,
-        onComplete: render
+        ease: 'Expo.easeInOut',
+        onComplete: () => {
+          mat.uniforms.currentImage.value = sliderImages[id];
+          mat.uniforms.dispFactor.value = 0.0;
+        }
       });
-    }
-
-    function transitionOut() {
-      gsap.to(mat.uniforms.dispFactor, speedOut, {
-        value: 0,
-        ease: easing,
-        onUpdate: render,
-        onComplete: render
-      });
-    }
-
-    window.addEventListener('resize', function (e) {
-      if (parent.offsetHeight / parent.offsetWidth < imageAspect) {
-        a1 = 1;
-        a2 = parent.offsetHeight / parent.offsetWidth / imageAspect;
-      } else {
-        a1 = (parent.offsetWidth / parent.offsetHeight) * imageAspect;
-        a2 = 1;
-      }
-      object.material.uniforms.res.value = new THREE.Vector4(
-        parent.offsetWidth,
-        parent.offsetHeight,
-        a1,
-        a2
-      );
-      renderer.setSize(parent.offsetWidth, parent.offsetHeight);
-
-      render();
-    });
-    this.transitionIn = transitionIn;
-    this.transitionOut = transitionOut;
+    };
   }
 }
