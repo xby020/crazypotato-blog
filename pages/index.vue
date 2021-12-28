@@ -1,10 +1,12 @@
 <template>
-  <div>
-    <potato-img
-      width="100%"
-      height="400px"
-      src="https://cdn.pixabay.com/photo/2021/11/19/15/21/christmas-6809681_960_720.png"
-    ></potato-img>
+  <div class="w-full">
+    <div class="w-full">
+      <potato-img
+        width="100%"
+        height="400px"
+        src="https://cdn.pixabay.com/photo/2021/11/19/15/21/christmas-6809681_960_720.png"
+      ></potato-img>
+    </div>
     This is index page.
 
     <nuxt-link to="/blog" v-slot="{ navigate }">
@@ -17,7 +19,9 @@
       <potato-switch></potato-switch>
     </div>
 
-    <potato-slider></potato-slider>
+    <div class="w-600px h-400px">
+      <potato-slider></potato-slider>
+    </div>
   </div>
 </template>
 

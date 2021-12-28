@@ -1,5 +1,5 @@
 <template>
-  <div class="w-400px h-300px bg-dark-700" ref="slider"></div>
+  <div class="w-full h-full bg-dark-700" ref="slider"></div>
   <button @click="switchFunc(0)" class="w-40 h-16 bg-blue-300 text-center">
     1
   </button>
@@ -19,7 +19,7 @@ const imgList = [
   'https://cdn.pixabay.com/photo/2021/12/13/14/57/trees-6868446_960_720.jpg'
 ];
 
-const slider = ref(null);
+const slider = ref();
 const animation = ref();
 
 onMounted(() => {

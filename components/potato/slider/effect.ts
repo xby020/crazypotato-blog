@@ -4,11 +4,12 @@ import { Texture } from 'three';
 
 interface opts {
   images: string[];
-  container: any;
+  container: HTMLElement;
 }
 
 export class transEffect {
   switchById(id: number) {}
+  isAnimating: boolean;
   constructor(opts: opts) {
     // 工具常量
     const vertex = `
@@ -47,10 +48,39 @@ export class transEffect {
 
       }
   `;
-    const renderW = 400;
-    const renderH = 300;
 
     const { images, container } = opts;
+
+    // set render size
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    function getRenderSize(imgUrl: string): {
+      renderH: number;
+      renderW: number;
+    } {
+      let renderH: number, renderW: number;
+      let image = new Image();
+      image.src = imgUrl;
+      console.log(image);
+      const imgWidth = image.width;
+      const imgHeight = image.height;
+      console.log(imgWidth, imgHeight, containerWidth, containerHeight);
+      if (imgHeight < imgWidth) {
+        renderW = containerWidth;
+        renderH = imgHeight;
+      } else {
+        renderW = imgWidth;
+        renderH = containerHeight;
+      }
+      return {
+        renderH,
+        renderW
+      };
+    }
+    const renderW = containerWidth;
+    const renderH = containerHeight;
+
+    // console.log(renderW, renderH);
 
     // three renderer and loader
     const renderer = new THREE.WebGLRenderer({
@@ -58,7 +88,7 @@ export class transEffect {
     });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0x23272a, 1.0);
-    renderer.setSize(renderW, renderH);
+    renderer.setSize(containerWidth, containerHeight);
     container.appendChild(renderer.domElement);
 
     const loader = new THREE.TextureLoader();
@@ -77,11 +107,11 @@ export class transEffect {
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x23272a);
 
-    let camera = new THREE.OrthographicCamera(
-      renderW / -2,
-      renderW / 2,
-      renderH / 2,
-      renderH / -2,
+    const camera = new THREE.OrthographicCamera(
+      containerWidth / -2,
+      containerWidth / 2,
+      containerHeight / 2,
+      containerHeight / -2,
       1,
       1000
     );
@@ -99,37 +129,52 @@ export class transEffect {
       opacity: 1.0
     });
     const geometry = new THREE.PlaneBufferGeometry(
-      container.offsetWidth,
-      container.offsetHeight,
+      container.clientWidth,
+      container.clientHeight,
       1
     );
     const object = new THREE.Mesh(geometry, mat);
     object.position.set(0, 0, 0);
     scene.add(object);
 
-    let animate = function () {
+    function render(): void {
+      renderer.render(scene, camera);
+    }
+    const animate = function () {
       requestAnimationFrame(animate);
 
       renderer.render(scene, camera);
     };
     animate();
 
+    // resize
+    window.addEventListener('resize', function (e) {
+      renderer.setSize(containerWidth, containerHeight);
+      render();
+    });
+
     // switch function
+    this.isAnimating = false;
     /**
      * @description 按图片 index id 切换图片
      *
      * @param {number} id 图片id
      */
     this.switchById = function switchById(id: number): void {
-      mat.uniforms.nextImage.value = sliderImages[id];
-      gsap.to(mat.uniforms.dispFactor, 1, {
-        value: 1,
-        ease: 'Expo.easeInOut',
-        onComplete: () => {
-          mat.uniforms.currentImage.value = sliderImages[id];
-          mat.uniforms.dispFactor.value = 0.0;
-        }
-      });
+      if (!this.isAnimating) {
+        this.isAnimating = true;
+        mat.uniforms.nextImage.value = sliderImages[id];
+        gsap.to(mat.uniforms.dispFactor, 0.8, {
+          value: 1,
+          ease: 'Expo.easeOut',
+          onComplete: () => {
+            render();
+            mat.uniforms.currentImage.value = sliderImages[id];
+            mat.uniforms.dispFactor.value = 0.0;
+            this.isAnimating = false;
+          }
+        });
+      }
     };
   }
 }
