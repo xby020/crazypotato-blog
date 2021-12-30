@@ -9,6 +9,14 @@ interface opts {
 
 export class transEffect {
   switchById(id: number) {}
+  /**
+   * @description 调整大小
+   *
+   * @param {number} w 容器宽度(px)
+   * @param {number} h 容器高度(px)
+   * @memberof transEffect
+   */
+  resize(w: number, h: number): void {}
   isAnimating: boolean;
   constructor(opts: opts) {
     // 工具常量
@@ -50,46 +58,13 @@ export class transEffect {
   `;
 
     const { images, container } = opts;
-
-    // set render size
-    const containerWidth = container.offsetWidth;
-    const containerHeight = container.offsetHeight;
-    function getRenderSize(imgUrl: string): {
-      renderH: number;
-      renderW: number;
-    } {
-      let renderH: number, renderW: number;
-      let image = new Image();
-      image.src = imgUrl;
-      console.log(image);
-      const imgWidth = image.width;
-      const imgHeight = image.height;
-      console.log(imgWidth, imgHeight, containerWidth, containerHeight);
-      if (imgHeight < imgWidth) {
-        renderW = containerWidth;
-        renderH = imgHeight;
-      } else {
-        renderW = imgWidth;
-        renderH = containerHeight;
-      }
-      return {
-        renderH,
-        renderW
-      };
-    }
-    const renderW = containerWidth;
-    const renderH = containerHeight;
-
-    // console.log(renderW, renderH);
+    let containerWidth = container.clientWidth;
+    let containerHeight = container.clientHeight;
 
     // three renderer and loader
     const renderer = new THREE.WebGLRenderer({
       antialias: false
     });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setClearColor(0x23272a, 1.0);
-    renderer.setSize(containerWidth, containerHeight);
-    container.appendChild(renderer.domElement);
 
     const loader = new THREE.TextureLoader();
     loader.crossOrigin = 'anonymous';
@@ -103,7 +78,31 @@ export class transEffect {
       sliderImages.push(image);
     });
 
-    // three scene
+    // set render size
+    function getRenderSize(img: Texture) {
+      let renderW: number, renderH: number;
+      const { width, height } = img.image;
+      const imgRatio = width / height;
+      const containerRatio = containerWidth / containerHeight;
+      if (imgRatio >= containerRatio) {
+        renderH = containerHeight;
+        renderW = renderH * imgRatio;
+      } else {
+        renderW = containerWidth;
+        renderH = renderW / imgRatio;
+      }
+      return {
+        renderW,
+        renderH
+      };
+    }
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setClearColor(0x23272a, 1.0);
+    // renderer.setSize(renderW, renderH);
+    renderer.setSize(containerWidth, containerHeight);
+    container.appendChild(renderer.domElement);
+
+    // start render first sence
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x23272a);
 
@@ -140,18 +139,25 @@ export class transEffect {
     function render(): void {
       renderer.render(scene, camera);
     }
-    const animate = function () {
-      requestAnimationFrame(animate);
 
+    // handler monitor resize
+    this.resize = function resize(w: number, h: number): void {
+      containerWidth = w;
+      containerHeight = h;
+      const { renderW, renderH } = getRenderSize(sliderImages[0]);
+      renderer.setSize(renderW, renderH);
+      render();
+    };
+
+    const animate = async function () {
+      requestAnimationFrame(animate);
+      sliderImages[0].onUpdate = () => {
+        const { renderW, renderH } = getRenderSize(sliderImages[0]);
+        renderer.setSize(renderW, renderH);
+      };
       renderer.render(scene, camera);
     };
     animate();
-
-    // resize
-    window.addEventListener('resize', function (e) {
-      renderer.setSize(containerWidth, containerHeight);
-      render();
-    });
 
     // switch function
     this.isAnimating = false;

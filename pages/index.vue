@@ -19,7 +19,7 @@
       <potato-switch></potato-switch>
     </div>
 
-    <div class="w-600px h-400px">
+    <div class="w-full h-400px">
       <potato-slider></potato-slider>
     </div>
   </div>
