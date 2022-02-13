@@ -6,6 +6,6 @@ export default defineNuxtConfig({
   },
   buildModules: ['nuxt-windicss', '@vueuse/core/nuxt'],
   alias: {
-    '@': './'
+    '@': '/'
   }
 });
