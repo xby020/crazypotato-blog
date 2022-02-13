@@ -71,6 +71,7 @@ export class transEffect {
 
     // 处理 images 内每个图像
     const sliderImages: Texture[] = [];
+
     images.forEach((img, imgIndex) => {
       loader.load(img, (texture) => {
         texture.magFilter = texture.minFilter = THREE.LinearFilter;
@@ -99,6 +100,7 @@ export class transEffect {
         renderH
       };
     }
+
     function setRenderSize(img: Texture) {
       const { renderW, renderH } = getRenderSize(img);
       renderer.setSize(renderW, renderH);
@@ -106,6 +108,7 @@ export class transEffect {
 
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0x23272a, 1.0);
+    renderer.setSize(containerWidth, containerHeight);
     container.appendChild(renderer.domElement);
 
     // start render first sence
@@ -150,6 +153,7 @@ export class transEffect {
     this.resize = function resize(w: number, h: number): void {
       containerWidth = w;
       containerHeight = h;
+
       const currentImage = mat.uniforms.currentImage.value;
       if (currentImage.image) {
         setRenderSize(mat.uniforms.currentImage.value);
@@ -160,6 +164,7 @@ export class transEffect {
     const animate = function () {
       requestAnimationFrame(animate);
       render();
+
     };
     animate();
 
@@ -174,6 +179,7 @@ export class transEffect {
       if (!this.isAnimating) {
         this.isAnimating = true;
         mat.uniforms.nextImage.value = sliderImages[id];
+
         setRenderSize(sliderImages[id]);
         gsap.to(mat.uniforms.dispFactor, 0.8, {
           value: 1,
