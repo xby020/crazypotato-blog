@@ -16,6 +16,9 @@
         </span>
       </div>
     </potato-app-bar>
-    <slot />
+    <!-- main content -->
+    <div class="w-full h-full">
+      <slot />
+    </div>
   </div>
 </template>
