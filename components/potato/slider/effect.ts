@@ -71,14 +71,17 @@ export class transEffect {
 
     // 处理 images 内每个图像
     const sliderImages: Texture[] = [];
-    images.forEach((img) => {
-      const image = loader.load(img);
-      image.magFilter = image.minFilter = THREE.LinearFilter;
-      image.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      sliderImages.push(image);
+    images.forEach((img, imgIndex) => {
+      loader.load(img, (texture) => {
+        texture.magFilter = texture.minFilter = THREE.LinearFilter;
+        texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        sliderImages[imgIndex] = texture;
+        if (imgIndex === 0) {
+          this.switchById(0);
+        }
+      });
     });
 
-    // set render size
     function getRenderSize(img: Texture) {
       let renderW: number, renderH: number;
       const { width, height } = img.image;
@@ -96,10 +99,13 @@ export class transEffect {
         renderH
       };
     }
+    function setRenderSize(img: Texture) {
+      const { renderW, renderH } = getRenderSize(img);
+      renderer.setSize(renderW, renderH);
+    }
+
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0x23272a, 1.0);
-    // renderer.setSize(renderW, renderH);
-    renderer.setSize(containerWidth, containerHeight);
     container.appendChild(renderer.domElement);
 
     // start render first sence
@@ -144,18 +150,16 @@ export class transEffect {
     this.resize = function resize(w: number, h: number): void {
       containerWidth = w;
       containerHeight = h;
-      const { renderW, renderH } = getRenderSize(sliderImages[0]);
-      renderer.setSize(renderW, renderH);
+      const currentImage = mat.uniforms.currentImage.value;
+      if (currentImage.image) {
+        setRenderSize(mat.uniforms.currentImage.value);
+      }
       render();
     };
 
-    const animate = async function () {
+    const animate = function () {
       requestAnimationFrame(animate);
-      sliderImages[0].onUpdate = () => {
-        const { renderW, renderH } = getRenderSize(sliderImages[0]);
-        renderer.setSize(renderW, renderH);
-      };
-      renderer.render(scene, camera);
+      render();
     };
     animate();
 
@@ -170,6 +174,7 @@ export class transEffect {
       if (!this.isAnimating) {
         this.isAnimating = true;
         mat.uniforms.nextImage.value = sliderImages[id];
+        setRenderSize(sliderImages[id]);
         gsap.to(mat.uniforms.dispFactor, 0.8, {
           value: 1,
           ease: 'Expo.easeOut',
