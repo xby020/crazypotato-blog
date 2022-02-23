@@ -1,0 +1,45 @@
+<template>
+  <label class="cursor-pointer inline-block">
+    <input
+      type="checkbox"
+      class="
+        absolute
+        opacity-0
+        checked:sibling:(bg-success
+        shadow-inner)
+        checked:sibling:children:(translate-x-full
+        border-lime-700)
+      "
+    />
+    <!-- background -->
+    <div
+      class="
+        w-10
+        h-5
+        flex
+        items-center
+        rounded-full
+        bg-gray-200
+        transition
+        ease-in-out
+        duration-400
+      "
+    >
+      <!-- knob -->
+      <div
+        class="
+          w-4.5
+          h-4.5
+          shadow
+          ml-0.5
+          bg-light-50
+          rounded-full
+          transform
+          transition
+          ease-bounce
+          duration-400
+        "
+      ></div>
+    </div>
+  </label>
+</template>
