@@ -1,8 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="w-full h-400px">
-      <potato-slider></potato-slider>
-    </div>
+    <potato-slider class="w-full h-400px"></potato-slider>
 
     This is index page.
   </div>

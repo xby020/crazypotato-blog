@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full h-full bg-dark-700" ref="sliderElement">
+  <div class="relative z-0 w-full h-full bg-dark-700" ref="sliderElement">
     <!-- slider content -->
     <div
       class="absolute w-full h-full flex flex-col justify-center items-center bg-hero-texture bg-lime-900 bg-opacity-40"
@@ -93,6 +93,7 @@ const contentLink = ref();
 const animation = ref();
 const activeNav = ref<number>(0);
 
+// mouse hover effect
 const { pause, resume } = useIntervalFn(() => {
   const listLength = sliderList.length;
   if (activeNav.value < listLength - 1) {
