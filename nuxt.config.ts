@@ -7,5 +7,9 @@ export default defineNuxtConfig({
   buildModules: ['nuxt-windicss', '@vueuse/core/nuxt'],
   alias: {
     '@': '/'
+  },
+  privateRuntimeConfig: {
+    NOTION_DATABASE: process.env.NOTION_DATABASE,
+    NOTION_KEY: process.env.NOTION_KEY
   }
 });
