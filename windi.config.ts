@@ -15,7 +15,7 @@ export default defineConfig({
   ],
   daisyui: {
     styled: true,
-    themes: true,
+    themes: ['emerald'],
     base: true,
     utils: true,
     logs: true,

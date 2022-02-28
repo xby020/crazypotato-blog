@@ -1,7 +1,10 @@
 import config from '#config';
+import { notion } from '~~/composables/notion/client';
 
-export default () => {
-  const database = config.NOTION_DATABASE;
-  // console.log(database);
-  return 233;
+export default async () => {
+  const databaseId = config.NOTION_DATABASE;
+  const res = await notion.databases.query({
+    database_id: databaseId
+  });
+  return res;
 };
