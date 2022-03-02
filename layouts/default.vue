@@ -2,11 +2,11 @@
   <div class="w-full h-full">
     <potato-app-bar
       color="bg-background-dark"
-      class="relative z-99 flex flex-row justify-between 2xl:justify-around items-center px-4"
+      class="relative z-99 max-w-1920px flex flex-row justify-between items-center px-4"
     >
       <!-- logo -->
       <div
-        class="h-full text-transparent bg-gradient-5 bg-clip-text font-bold text-2xl flex items-center cursor-pointer tracking-wide"
+        class="h-full text-transparent bg-gradient-5 bg-clip-text font-bold text-2xl flex items-center cursor-pointer tracking-wide ml-16"
       >
         <potato-avatar
           url="https://s2.loli.net/2022/02/18/xdLpywIRSjlz9fo.jpg"
@@ -15,34 +15,29 @@
         CrazyPotato
       </div>
       <!-- menu -->
-      <div>
+      <div class="absolute left-1/2 transform -translate-x-1/2">
         <ul class="menu menu-horizontal p-0">
-          <li><a>Item 1</a></li>
-          <li tabindex="0">
-            <a>
-              Parent
-              <svg
-                class="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
-                />
-              </svg>
-            </a>
-            <ul class="p-2 bg-base-100">
-              <li><a>Submenu 1</a></li>
-              <li><a>Submenu 2</a></li>
-            </ul>
+          <!-- Top menu -->
+          <li v-for="(m, mIndex) in menu" :key="mIndex">
+            <div class="border-2 border-transparent hover:border-lime-600">
+              <potato-icon :type="m.menuIcon"></potato-icon>
+              <h2 class="text-xl">{{ m.menuName }}</h2>
+            </div>
           </li>
-          <li><a>Item 3</a></li>
         </ul>
       </div>
       <!-- Tools -->
-      <div>This is Tools</div>
+      <div class="mr-16 siblings:mx-2">
+        <button class="btn btn-circle btn-outline">
+          <potato-icon type="email-block"></potato-icon>
+        </button>
+        <button class="btn btn-circle btn-outline">
+          <potato-icon type="email-block"></potato-icon>
+        </button>
+        <button class="btn btn-circle btn-outline">
+          <potato-icon type="email-block"></potato-icon>
+        </button>
+      </div>
     </potato-app-bar>
     <!-- main content -->
     <div class="w-full h-full">
@@ -50,3 +45,28 @@
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+interface Menu {
+  menuName: string;
+  menuIcon: string;
+}
+const menu: Menu[] = [
+  {
+    menuName: '设计',
+    menuIcon: 'graphic-design'
+  },
+  {
+    menuName: '编程',
+    menuIcon: 'code'
+  },
+  {
+    menuName: '游戏',
+    menuIcon: 'game-three'
+  },
+  {
+    menuName: '杂谈',
+    menuIcon: 'french-fries'
+  }
+];
+</script>
