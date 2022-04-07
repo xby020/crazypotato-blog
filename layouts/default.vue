@@ -21,22 +21,10 @@
           <li v-for="(m, mIndex) in menu" :key="mIndex">
             <div class="border-2 border-transparent hover:border-lime-600">
               <potato-icon :type="m.menuIcon"></potato-icon>
-              <h2 class="text-xl">{{ m.menuName }}</h2>
+              <h2 class="text-lg">{{ m.menuName }}</h2>
             </div>
           </li>
         </ul>
-      </div>
-      <!-- Tools -->
-      <div class="mr-16 siblings:mx-2">
-        <button class="btn btn-circle btn-outline">
-          <potato-icon type="email-block"></potato-icon>
-        </button>
-        <button class="btn btn-circle btn-outline">
-          <potato-icon type="email-block"></potato-icon>
-        </button>
-        <button class="btn btn-circle btn-outline">
-          <potato-icon type="email-block"></potato-icon>
-        </button>
       </div>
     </potato-app-bar>
     <!-- main content -->
