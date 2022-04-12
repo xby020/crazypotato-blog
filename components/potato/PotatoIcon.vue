@@ -1,11 +1,11 @@
 <template>
   <icon-park
-    class="text-center align-middle text-2xl"
+    class="text-center align-middle text-inherit flex justify-center items-center"
     :type="type"
     :theme="theme"
-    size="1.5rem"
+    size="1.2rem"
     :stroke-width="4"
-    :fill="['currentColor', '#44b85c']"
+    :fill="['#c9ffd9', '#44b85c']"
   />
 </template>
 

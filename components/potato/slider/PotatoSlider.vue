@@ -26,7 +26,7 @@
           class="btn btn-primary min-w-128px font-bold text-lg text-justify"
           ref="contentLink"
         >
-          关于
+          查看
         </a>
       </div>
     </div>
@@ -58,29 +58,11 @@ import {
 } from '@vueuse/core';
 import { transEffect } from './effect';
 
-const sliderList: slider[] = [
-  {
-    title: '标题1',
-    content:
-      '这是标题1的内容,这是标题1的内容,这是标题1的内容，这是标题1的内容，这是标题1的内容这是标题1的内容，这是标题1的内容，这是标题1的内容',
-    imgLink:
-      'https://cdn.pixabay.com/photo/2022/01/16/15/03/finch-6942278_960_720.jpg'
-  },
-  {
-    title: '标题2',
-    content:
-      '这是标题2的内容2的内容2的内容2的内容2的内容2的内容2的内容2的内容2的内容2的内容2的内容，2的内容2的内容，2的内容2的内容2的内容2的内容，2的内容',
-    imgLink:
-      'https://cdn.pixabay.com/photo/2021/12/02/18/46/soda-water-6841140_960_720.jpg'
-  },
-  {
-    title: '标题3',
-    content:
-      '这是标题3的内容，3的内容，3的内容3的内容3的内容3的内容，3的内容，3的内容3的内容3的内容，3的内容3的内容3的内容3的内容，3的内容，3的内容3的内容3的内容',
-    imgLink:
-      'https://cdn.pixabay.com/photo/2021/12/08/15/53/traffic-6856075_960_720.jpg'
-  }
-];
+const props = defineProps<{
+  sliderList: slider[];
+}>();
+
+const { sliderList } = toRefs(props);
 
 // Dom
 const sliderElement = ref();
@@ -95,7 +77,7 @@ const activeNav = ref<number>(0);
 
 // mouse hover effect
 const { pause, resume } = useIntervalFn(() => {
-  const listLength = sliderList.length;
+  const listLength = sliderList.value.length;
   if (activeNav.value < listLength - 1) {
     switchSlider(activeNav.value + 1);
   } else {
@@ -106,7 +88,7 @@ const { pause, resume } = useIntervalFn(() => {
 onMounted(() => {
   animation.value = new transEffect({
     container: slider.value,
-    sliderList: sliderList,
+    sliderList: sliderList.value,
     title: contentTitle.value,
     content: contentDesc.value,
     link: contentLink.value
