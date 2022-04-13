@@ -7,14 +7,14 @@
       <div class="w-1/2">
         <!-- content title -->
         <div
-          class="w-full text-light-50 font-bold text-64px my-3 opacity-0 select-none"
+          class="w-full text-light-50 font-bold text-48px my-3 opacity-0 select-none tracking-wider"
           ref="contentTitle"
         >
           {{ sliderList[activeNav].title }}
         </div>
         <!-- content description -->
         <div
-          class="w-full max-w-400px text-light-50 my-3 select-none opacity-0"
+          class="w-full max-w-400px text-light-50 mt-3 mb-9 select-none opacity-0"
           ref="contentDesc"
         >
           {{ sliderList[activeNav].content }}
@@ -22,8 +22,7 @@
         <!-- content link -->
         <a
           role="button"
-          data-theme="emeraid"
-          class="btn btn-primary min-w-128px font-bold text-lg text-justify"
+          class="w-32 btn btn-outline glass no-animation tracking-widest"
           ref="contentLink"
         >
           查看

@@ -180,7 +180,7 @@ export class transEffect {
 
         setRenderSize(sliderImages[id]);
         // image chage effect
-        gsap.to(mat.uniforms.dispFactor, 1, {
+        gsap.to(mat.uniforms.dispFactor, 1.5, {
           value: 1,
           ease: 'Expo.easeOut',
           onComplete: () => {

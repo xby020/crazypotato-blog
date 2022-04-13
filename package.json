@@ -9,6 +9,8 @@
     "@vueuse/nuxt": "^7.6.2",
     "@windicss/plugin-heropatterns": "^0.0.8",
     "daisyui": "^2.1.0",
+    "eslint": "^8.13.0",
+    "eslint-plugin-vue": "^8.6.0",
     "gsap": "^3.9.1",
     "nuxt-windicss": "^2.2.5",
     "nuxt3": "^3.0.0-27491748.3186841",

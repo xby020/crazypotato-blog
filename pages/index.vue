@@ -1,10 +1,12 @@
 <template>
   <div class="w-full">
     <!-- banner -->
-    <!-- <potato-slider
+    <potato-slider
       class="w-full h-630px"
       :slider-list="sliderList"
-    ></potato-slider> -->
+      v-if="sliderList.length !== 0"
+    ></potato-slider>
+    <div class="bg-dark-400 w-full h-630px" v-else></div>
 
     <!-- Topic -->
     <div
@@ -99,11 +101,18 @@ definePageMeta({
 });
 
 // banner slider
-const sliderList = ref();
+const sliderList = ref([]);
 onMounted(async () => {
-  const res = await $fetch('api/notion/banner');
-  sliderList = res.results.map((page) => {
-    const title = page.properties;
+  const res: any = await $fetch('api/notion/banner');
+  sliderList.value = res.results.map((page: any) => {
+    const title = page.properties.Name.title[0].plain_text;
+    const content = page.properties.Description.rich_text[0].plain_text;
+    const imgLink = page.properties.Cover.files[0].external.url;
+    return {
+      title,
+      content,
+      imgLink
+    };
   });
 });
 </script>
