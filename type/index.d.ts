@@ -4,4 +4,5 @@ declare module '@nuxt/schema' {
     NOTION_TOKEN: string;
   }
 }
+
 export {};

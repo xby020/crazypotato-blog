@@ -54,7 +54,7 @@
               class="blur-bg rounded-xl w-full h-full absolute filter blur opacity-70 transition-transform transform scale-0"
             ></div>
             <img
-              src="https://api.lorem.space/image/furniture?w=280&h=210&hash=225A6693"
+              src="https://api.lorem.space/image/furniture?w=280&h=210&hash=225A6493"
               class="rounded-box"
             />
           </div>
@@ -67,7 +67,7 @@
               class="blur-bg rounded-xl w-full h-full absolute filter blur opacity-70 transition-transform transform scale-0"
             ></div>
             <img
-              src="https://api.lorem.space/image/furniture?w=280&h=210&hash=225C6693"
+              src="https://api.lorem.space/image/furniture?w=280&h=210&hash=225C1293"
               class="rounded-box"
             />
           </div>
@@ -76,25 +76,25 @@
     </div>
 
     <!-- main content -->
-    <div class="w-full flex flex-col items-center">
-      <div class="container flex flex-row justify-center items-start">
-        <!-- left -->
-        <div class="w-[820px] mr-[80px]">
-          <div class="tabs">
-            <a class="tab tab-bordered">Tab 1</a>
-            <a class="tab tab-bordered tab-active">Tab 2</a>
-            <a class="tab tab-bordered">Tab 3</a>
-          </div>
-        </div>
-
-        <!-- right -->
-        <div class="w-[250px] bg-purple-900">233</div>
+    <div class="w-1180px mx-auto flex flex-row items-start">
+      <!-- left -->
+      <div class="w-[70%] grid grid-cols-1 gap-y-8">
+        <potato-page-card
+          v-for="(page, pageIndex) in pageList"
+          :key="pageIndex"
+          :info="page"
+        ></potato-page-card>
       </div>
+
+      <!-- right -->
+      <div class="w-[30%] bg-purple-900">233</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+
 definePageMeta({
   title: 'BLOG',
   layout: 'index'
@@ -114,6 +114,26 @@ onMounted(async () => {
       imgLink
     };
   });
+});
+
+// page list
+const pageList = ref();
+async function getAllPage() {
+  const res: QueryDatabaseResponse = await $fetch('api/notion/allPage');
+  console.log(res);
+  pageList.value = res.results.map((page: any) => {
+    const title = page.properties.Name.title[0].plain_text;
+    const content = page.properties.Description.rich_text[0].plain_text;
+    const imgLink = page.properties.Cover.files[0].external.url;
+    return {
+      title,
+      content,
+      imgLink
+    };
+  });
+}
+onMounted(async () => {
+  await getAllPage();
 });
 </script>
 

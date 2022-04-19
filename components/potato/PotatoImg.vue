@@ -4,7 +4,7 @@
     :style="styleConfig"
     class="bg-center bg-cover bg-no-repeat"
   >
-    <div class="bg-hero-texture w-full h-full"></div>
+    <div class="bg-hero-texture w-full h-full" v-show="partten"></div>
   </div>
 </template>
 
@@ -16,15 +16,17 @@ interface PotatoImgPorps {
   src: string;
   width?: string | number;
   height?: string | number;
+  partten?: boolean;
 }
 
 // props
 const props = withDefaults(defineProps<PotatoImgPorps>(), {
-  src: ''
+  src: '',
+  partten: false
 });
 
 // ref props
-const { src, width, height } = toRefs(props);
+const { src, width, height, partten } = toRefs(props);
 
 // img intersector
 const imgIsVisiable = ref(false);
