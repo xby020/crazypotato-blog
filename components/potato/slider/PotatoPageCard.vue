@@ -13,7 +13,9 @@
       <p>{{ content }}</p>
       <!-- action -->
       <div class="card-actions justify-end">
-        <button class="btn btn-primary">查看</button>
+        <button class="btn btn-outlined tracking-widest" @click="navTo">
+          查看
+        </button>
       </div>
     </div>
   </div>
@@ -21,10 +23,15 @@
 
 <script lang="ts" setup>
 const props = defineProps<{
-  info: PageCard;
+  info: Page.Card;
 }>();
 
-const { title, content, imgLink } = toRefs(props.info);
+const { title, content, imgLink, pageId } = toRefs(props.info);
+function navTo() {
+  return navigateTo({
+    path: '/blog'
+  });
+}
 </script>
 
 <style lang=""></style>
