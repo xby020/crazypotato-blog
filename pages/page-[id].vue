@@ -2,16 +2,18 @@
   <div>
     <!-- banner -->
     <div class="relative w-full h-320px bg-neutral">
+      <!-- background img -->
       <potato-img
         src="https://api.lorem.space/image/game?w=1920&h=1080&hash=225C1293"
-        opacity="30"
+        loading-icon
+        partten
+        class="opacity-30"
       ></potato-img>
-      <div class="w-664px h-320px rounded-3xl border">
+      <!-- head img -->
+      <div class="w-664px h-320px">
         <potato-img
-          src="https://api.lorem.space/image/game?w=1920&h=1080&hash=225C1293"
-          width="664px"
-          height="320px"
-          partten
+          src="https://api.lorem.space/image/game?w=1920&h=1080&hash=22532293"
+          loading-icon
         ></potato-img>
       </div>
     </div>

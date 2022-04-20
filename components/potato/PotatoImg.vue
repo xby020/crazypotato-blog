@@ -2,21 +2,25 @@
   <div
     ref="targetImg"
     :style="styleConfig"
-    class="bg-center bg-cover bg-no-repeat bg-neutral"
+    class="relative bg-center bg-cover bg-no-repeat bg-neutral"
+    :class="imgLoading ? 'animate-pulse' : ''"
   >
     <!-- partten -->
     <div class="bg-hero-texture w-full h-full" v-show="partten"></div>
     <!-- loading -->
     <div
-      class="w-full h-full flex justify-center items-center"
+      class="absolute top-0 w-full h-full flex justify-center items-center"
       v-if="loadingIcon"
       v-show="imgLoading"
     >
-      <potato-icon
-        type="loading-one"
-        class="animate-spin text-3xl"
-        size="32"
-      ></potato-icon>
+      <potato-icon type="loading" class="animate-spin" size="32"></potato-icon>
+    </div>
+    <!-- error icon -->
+    <div
+      class="absolute top-0 w-full h-full flex justify-center items-center"
+      v-if="damageImg"
+    >
+      <potato-icon type="damage-map" size="32"></potato-icon>
     </div>
   </div>
 </template>
@@ -56,6 +60,7 @@ useIntersectionObserver(targetImg, ([{ isIntersecting }]) => {
 
 // backgound img onload
 const bgImg = ref('');
+const damageImg = ref(false);
 const imgLoading = ref(false);
 function load() {
   imgLoading.value = true;
@@ -67,6 +72,7 @@ function load() {
   };
   img.onerror = () => {
     imgLoading.value = false;
+    damageImg.value = true;
   };
 }
 onMounted(() => {
