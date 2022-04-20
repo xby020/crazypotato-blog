@@ -2,19 +2,30 @@
   <div
     ref="targetImg"
     :style="styleConfig"
-    class="relative bg-center bg-cover bg-no-repeat bg-neutral"
-    :class="imgLoading ? 'animate-pulse' : ''"
+    class="relative bg-center bg-cover bg-no-repeat"
   >
     <!-- partten -->
     <div class="bg-hero-texture w-full h-full" v-show="partten"></div>
     <!-- loading -->
-    <div
-      class="absolute top-0 w-full h-full flex justify-center items-center"
-      v-if="loadingIcon"
-      v-show="imgLoading"
+    <Transition
+      enter-active-class="transform duration-300 ease-in"
+      leave-active-class="transform duration-300 ease-in"
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
     >
-      <potato-icon type="loading" class="animate-spin" size="32"></potato-icon>
-    </div>
+      <div
+        class="absolute top-0 w-full h-full flex justify-center items-center bg-neutral"
+        v-if="imgLoading"
+      >
+        <potato-icon
+          type="loading"
+          class="animate-spin"
+          size="32"
+          v-if="loadingIcon"
+        ></potato-icon>
+      </div>
+    </Transition>
+
     <!-- error icon -->
     <div
       class="absolute top-0 w-full h-full flex justify-center items-center"
