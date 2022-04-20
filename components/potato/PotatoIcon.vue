@@ -3,7 +3,7 @@
     class="text-center align-middle text-inherit flex justify-center items-center"
     :type="type"
     :theme="theme"
-    size="1.2rem"
+    :size="size"
     :stroke-width="4"
     :fill="['#c9ffd9', '#44b85c']"
   />
@@ -16,10 +16,12 @@ import { Theme } from '@icon-park/vue-next/es/runtime';
 interface Props {
   type: string;
   theme?: Theme;
+  size?: string;
 }
 
 withDefaults(defineProps<Props>(), {
   type: 'add-text',
-  theme: 'two-tone'
+  theme: 'two-tone',
+  size: '1.2rem'
 });
 </script>

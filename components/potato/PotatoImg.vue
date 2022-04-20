@@ -2,9 +2,22 @@
   <div
     ref="targetImg"
     :style="styleConfig"
-    class="bg-center bg-cover bg-no-repeat"
+    class="bg-center bg-cover bg-no-repeat bg-neutral"
   >
+    <!-- partten -->
     <div class="bg-hero-texture w-full h-full" v-show="partten"></div>
+    <!-- loading -->
+    <div
+      class="w-full h-full flex justify-center items-center"
+      v-if="loadingIcon"
+      v-show="imgLoading"
+    >
+      <potato-icon
+        type="loading-one"
+        class="animate-spin text-3xl"
+        size="32"
+      ></potato-icon>
+    </div>
   </div>
 </template>
 
@@ -17,16 +30,18 @@ interface PotatoImgPorps {
   width?: string | number;
   height?: string | number;
   partten?: boolean;
+  loadingIcon?: boolean;
 }
 
 // props
 const props = withDefaults(defineProps<PotatoImgPorps>(), {
   src: '',
-  partten: false
+  partten: false,
+  loadingIcon: false
 });
 
 // ref props
-const { src, width, height, partten } = toRefs(props);
+const { src, width, height, partten, loadingIcon } = toRefs(props);
 
 // img intersector
 const imgIsVisiable = ref(false);
@@ -39,7 +54,24 @@ useIntersectionObserver(targetImg, ([{ isIntersecting }]) => {
   imgIsVisiable.value = isIntersecting;
 });
 
-const bgImg = `background-image:url(${src.value})`;
+// backgound img onload
+const bgImg = ref('');
+const imgLoading = ref(false);
+function load() {
+  imgLoading.value = true;
+  const img = new Image();
+  img.src = src.value;
+  img.onload = () => {
+    bgImg.value = `background-image:url(${src.value})`;
+    imgLoading.value = false;
+  };
+  img.onerror = () => {
+    imgLoading.value = false;
+  };
+}
+onMounted(() => {
+  load();
+});
 
 // return class config
 const imgWidthClass = computed((): string => {
@@ -50,7 +82,7 @@ const imgHeightClass = computed((): string => {
 });
 // final style
 const styleConfig = computed((): string => {
-  return `${bgImg};${imgWidthClass.value};${imgHeightClass.value}`;
+  return `${bgImg.value};${imgWidthClass.value};${imgHeightClass.value}`;
 });
 </script>
 

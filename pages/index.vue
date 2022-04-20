@@ -96,8 +96,9 @@
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 definePageMeta({
-  title: 'BLOG',
-  layout: 'index'
+  title: 'Index',
+  layout: 'index',
+  keepalive: true
 });
 
 // banner slider

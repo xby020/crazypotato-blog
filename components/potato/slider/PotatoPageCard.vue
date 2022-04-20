@@ -29,7 +29,7 @@ const props = defineProps<{
 const { title, content, imgLink, pageId } = toRefs(props.info);
 function navTo() {
   return navigateTo({
-    path: '/blog'
+    path: `/page-${pageId.value}`
   });
 }
 </script>
