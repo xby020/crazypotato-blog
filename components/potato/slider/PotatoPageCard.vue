@@ -22,8 +22,10 @@
 </template>
 
 <script lang="ts" setup>
+import { NotionPage } from '~~/type/page';
+
 const props = defineProps<{
-  info: Page.Card;
+  info: NotionPage.Card;
 }>();
 
 const { title, content, imgLink, pageId } = toRefs(props.info);

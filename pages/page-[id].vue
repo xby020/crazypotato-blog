@@ -29,13 +29,13 @@
 
         <!-- titie -->
         <div class="w-full pt-64px">
+          <!-- head img -->
           <div class="w-768px h-320px mx-auto">
             <potato-img :src="pageInfo.cover" loading-icon></potato-img>
           </div>
 
+          <!-- head -->
           <div class="w-664px h-320px mx-auto">
-            <!-- head img -->
-
             <!-- title -->
             <h1
               class="font-semibold font-mono text-3xl my-4 text-center tracking-wider"
@@ -43,9 +43,20 @@
               {{ pageInfo.title }}
             </h1>
 
+            <!-- create time -->
             <h2 class="font-mono my-4 text-center">
               {{ pageInfo.createdTime }}
             </h2>
+
+            <!-- tags -->
+
+            <!-- description -->
+            <div class="alert alert-info shadow-lg">
+              <div>
+                <potato-icon type="quote"></potato-icon>
+                <span>{{ pageInfo.description }}</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -61,6 +72,8 @@
   </div>
 </template>
 <script lang="ts" setup>
+import Dayjs from 'dayjs';
+
 definePageMeta({
   title: 'page'
 });
@@ -76,12 +89,14 @@ async function getPageContent() {
 
 function decodeResult(page: any) {
   const title = page.properties.Name.title[0].plain_text;
-  const discrition = page.properties.Description.rich_text[0].plain_text;
-  const createdTime = page.properties.Created.created_time;
+  const description = page.properties.Description.rich_text[0].plain_text;
+  const createdTime = Dayjs(page.properties.Created.created_time).format(
+    'YYYY-MM-DD'
+  );
   const tags = page.properties.Tags.multi_select;
   const cover = page.properties.Cover.files[0].external.url;
 
-  const pageInfo = { title, discrition, createdTime, tags, cover };
+  const pageInfo = { title, description, createdTime, tags, cover };
   return pageInfo;
 }
 
@@ -90,6 +105,13 @@ const pageInfo = ref();
 onMounted(async () => {
   const content = await getPageContent();
   pageInfo.value = decodeResult(content);
+});
+
+// page content
+const pageContent = ref();
+onMounted(async () => {
+  const contentResult = await $fetch(`api/notion/block/${pageId}`);
+  console.log(contentResult);
 });
 </script>
 <style lang=""></style>

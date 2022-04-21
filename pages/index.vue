@@ -126,7 +126,7 @@ async function getAllPage() {
   pageList.value = res.results.map((page: any) => {
     const title = page.properties.Name.title[0].plain_text;
     const content = page.properties.Description.rich_text[0].plain_text;
-    const imgLink = page.properties.Cover.files[0].external.url;
+    const imgLink = page.properties.Cover.files[0].external.url || '';
     const pageId = page.id;
     return {
       title,
