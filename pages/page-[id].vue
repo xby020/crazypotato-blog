@@ -35,7 +35,7 @@
           </div>
 
           <!-- head -->
-          <div class="w-664px h-320px mx-auto">
+          <div class="w-664px mx-auto">
             <!-- title -->
             <h1
               class="font-semibold font-mono text-3xl my-4 text-center tracking-wider"
@@ -49,6 +49,15 @@
             </h2>
 
             <!-- tags -->
+            <div>
+              <button
+                class="btn btn-xs btn-outline m-1 mb-4 font-thin"
+                v-for="tag in pageInfo.tags"
+                :key="tag.id"
+              >
+                {{ tag.name }}
+              </button>
+            </div>
 
             <!-- description -->
             <div class="alert alert-info shadow-lg">
@@ -58,20 +67,28 @@
               </div>
             </div>
           </div>
+
+          <div class="divider w-full"></div>
         </div>
 
-        <!-- page info -->
-
-        <!-- quote -->
-
         <!-- main content -->
-
+        <div class="relative w-664px min-h-720px mx-auto">
+          <potato-overlay
+            v-if="!pageContent"
+            loading-icon
+            dark
+          ></potato-overlay>
+          <div v-else>
+            {{ pageContent }}
+          </div>
+        </div>
         <!-- comment -->
       </div>
     </transition>
   </div>
 </template>
 <script lang="ts" setup>
+import { switchCase } from '@babel/types';
 import Dayjs from 'dayjs';
 
 definePageMeta({
@@ -112,6 +129,33 @@ const pageContent = ref();
 onMounted(async () => {
   const contentResult = await $fetch(`api/notion/block/${pageId}`);
   console.log(contentResult);
+  pageContent.value = contentResult;
 });
+
+// tags color
+const tagColorClass = (color: string) => {
+  switch (color) {
+    case 'gray':
+      return 'border-gray-600 text-gray-600';
+    case 'brown':
+      return 'border-yellow-700 text-yellow-700';
+    case 'orange':
+      return 'border-yellow-500 text-yellow-500';
+    case 'yellow':
+      return 'border-yellow-300 text-yellow-300';
+    case 'green':
+      return 'border-green-500 text-green-500';
+    case 'blue':
+      return 'border-blue-500 text-blue-500';
+    case 'purple':
+      return 'border-purple-500 text-purple-500';
+    case 'pink':
+      return 'border-pink-500 text-pink-500';
+    case 'red':
+      return 'border-red-600 text-red-600';
+    default:
+      return 'border-gray-100 text-gray-100';
+  }
+};
 </script>
 <style lang=""></style>

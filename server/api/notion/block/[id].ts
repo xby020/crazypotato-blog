@@ -3,19 +3,20 @@ import { notion } from '~~/composables/notion/client';
 
 export default defineEventHandler(async (event) => {
   const pageId = event.context.params.id;
-
-  async function getBlockResult(blockId: string, pageSize: number = 100) {
-    let listBlockResult: ListBlockChildrenResponse['results'][] = [];
-
-    const res = await notion.blocks.children.list({
-      block_id: blockId,
-      page_size: pageSize
+  const listBlockResult: any = [];
+  let cursor = undefined;
+  while (true) {
+    const res: ListBlockChildrenResponse = await notion.blocks.children.list({
+      block_id: pageId,
+      page_size: 100,
+      start_cursor: cursor
     });
-
-    listBlockResult = useConcat(listBlockResult, res.results);
-    // next
-    if (res.next_cursor) {
-      getBlockResult(res.next_cursor);
+    const { results, next_cursor } = res;
+    listBlockResult.push(...results);
+    if (!next_cursor) {
+      break;
     }
+    cursor = next_cursor;
   }
+  return listBlockResult;
 });
