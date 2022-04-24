@@ -281,10 +281,10 @@
   dependencies:
     mime "^3.0.0"
 
-"@eslint/eslintrc@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.npmmirror.com/@eslint/eslintrc/-/eslintrc-1.2.1.tgz#8b5e1c49f4077235516bc9ec7d41378c0f69b8c6"
-  integrity sha512-bxvbYnBPN1Gibwyp6NrpnFzA3YtRL3BBAyEAFVIpNTm2Rn4Vy87GA5M4aSn3InRrlsbX5N0GW7XIx+U4SAEKdQ==
+"@eslint/eslintrc@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npmmirror.com/@eslint/eslintrc/-/eslintrc-1.2.2.tgz#4989b9e8c0216747ee7cca314ae73791bb281aae"
+  integrity sha512-lTVWHs7O2hjBFZunXTZYnYqtB9GakA1lnxIf+gKq2nY5gxkkNi/lQvveW6t8gFdOHTg6nG50Xs95PrLqVpcaLg==
   dependencies:
     ajv "^6.12.4"
     debug "^4.3.2"
@@ -316,9 +316,9 @@
   integrity sha512-AZaCcjRPU9vTNVfcrG03CYJM+uv0SXx5lC4njanlRorFo+TV/x0ZTYGYGpTR/l6ek6QmFu9THmrgqKl7i/8yHg==
 
 "@jridgewell/resolve-uri@^3.0.3":
-  version "3.0.5"
-  resolved "https://registry.npmmirror.com/@jridgewell/resolve-uri/-/resolve-uri-3.0.5.tgz#68eb521368db76d040a6315cdb24bf2483037b9c"
-  integrity sha512-VPeQ7+wH0itvQxnG+lIzWgkysKIr3L9sslimFW55rHMdGu/qCQ5z5h9zq4gI8uBtqkpHhsF4Z/OwExufUCThew==
+  version "3.0.6"
+  resolved "https://registry.npmmirror.com/@jridgewell/resolve-uri/-/resolve-uri-3.0.6.tgz#4ac237f4dabc8dd93330386907b97591801f7352"
+  integrity sha512-R7xHtBSNm+9SyvpJkdQl+qrM3Hm2fea3Ef197M3mUug+v+yR+Rhfbs7PBtcBUVnIWJ4JcAdjvij+c8hXS9p5aw==
 
 "@jridgewell/sourcemap-codec@^1.4.10":
   version "1.4.11"
@@ -437,30 +437,6 @@
     unimport "^0.1.6"
     untyped "^0.4.4"
 
-"@nuxt/kit@npm:@nuxt/kit-edge@latest":
-  version "3.0.0-rc.0-27508091.78fcbcf"
-  resolved "https://registry.npmmirror.com/@nuxt/kit-edge/-/kit-edge-3.0.0-rc.0-27508091.78fcbcf.tgz#a6479758eac42b8da132a3f95eaf1b4b90f34945"
-  integrity sha512-hn5mev+SZ8KSPi1wZdlTJf1fHVvhyDQK3zTOIbF+plCk1mWKoAtcPxqw/K7jjm082NvtRAwbEijKq6f/3SlIsA==
-  dependencies:
-    "@nuxt/schema" "npm:@nuxt/schema-edge@3.0.0-rc.0-27508091.78fcbcf"
-    c12 "^0.2.7"
-    consola "^2.15.3"
-    defu "^6.0.0"
-    globby "^13.1.1"
-    hash-sum "^2.0.0"
-    ignore "^5.2.0"
-    jiti "^1.13.0"
-    knitwork "^0.1.1"
-    lodash.template "^4.5.0"
-    mlly "^0.5.2"
-    pathe "^0.2.0"
-    pkg-types "^0.3.2"
-    scule "^0.2.1"
-    semver "^7.3.7"
-    unctx "^1.1.4"
-    unimport "^0.1.6"
-    untyped "^0.4.4"
-
 "@nuxt/schema@3.0.0-rc.0":
   version "3.0.0-rc.0"
   resolved "https://registry.npmmirror.com/@nuxt/schema/-/schema-3.0.0-rc.0.tgz#c8ba918d2f92ad56bbd3b87e7ee24bc2ba7b6df4"
@@ -481,22 +457,6 @@
   version "3.0.0-rc.1"
   resolved "https://registry.npmmirror.com/@nuxt/schema/-/schema-3.0.0-rc.1.tgz#ea8d3de35386cb287af6b54ba0075abee5d2ae61"
   integrity sha512-EhkSK8QnlAI/ZZoYHnks8yLa1KZRx+WO4gslkN9Wx85vU+3KAM7svSAljvSw3+7xxqQcZ1SeNuFXU3BT8r78KA==
-  dependencies:
-    c12 "^0.2.7"
-    create-require "^1.1.1"
-    defu "^6.0.0"
-    jiti "^1.13.0"
-    pathe "^0.2.0"
-    postcss-import-resolver "^2.0.0"
-    scule "^0.2.1"
-    std-env "^3.1.1"
-    ufo "^0.8.3"
-    unimport "^0.1.6"
-
-"@nuxt/schema@npm:@nuxt/schema-edge@3.0.0-rc.0-27508091.78fcbcf":
-  version "3.0.0-rc.0-27508091.78fcbcf"
-  resolved "https://registry.npmmirror.com/@nuxt/schema-edge/-/schema-edge-3.0.0-rc.0-27508091.78fcbcf.tgz#ea0b1a0b53fb319e51845ccd6da83059b8446db5"
-  integrity sha512-8ZGjok3i3D84qa5LExWUZOI50UABVUQ3prxb7kyLlHOOYd58/3QXUcq17NFg9I5PDBHXenEO3MpGAN67mWE67g==
   dependencies:
     c12 "^0.2.7"
     create-require "^1.1.1"
@@ -1462,9 +1422,9 @@ color-name@^1.0.0, color-name@^1.1.4, color-name@~1.1.4:
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
 color-string@^1.9.0:
-  version "1.9.0"
-  resolved "https://registry.npmmirror.com/color-string/-/color-string-1.9.0.tgz#63b6ebd1bec11999d1df3a79a7569451ac2be8aa"
-  integrity sha512-9Mrz2AQLefkH1UvASKj6v6hj/7eWgjnT/cVsR8CumieLoT+g900exWeNogqtweI8dxloXN9BDQTYro1oWu/5CQ==
+  version "1.9.1"
+  resolved "https://registry.npmmirror.com/color-string/-/color-string-1.9.1.tgz#4467f9146f036f855b764dfb5bf8582bf342c7a4"
+  integrity sha512-shrVawQFojnZv6xM40anx4CkoDP+fZsw/ZerEMsW/pyzsRbElpsL/DBVW7q3ExxwusdNXI3lXpuhEZkzs8p5Eg==
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
@@ -1707,9 +1667,9 @@ cuint@^0.2.2:
   integrity sha512-d4ZVpCW31eWwCMe1YT3ur7mUDnTXbgwyzaL320DrcRT45rfjYxkt5QWLrmOJ+/UEAI2+fQgKe/fCjR8l4TpRgw==
 
 daisyui@^2.1.0:
-  version "2.14.1"
-  resolved "https://registry.npmmirror.com/daisyui/-/daisyui-2.14.1.tgz#39fd835dc3fc6a045e79a2baa37acfd584c0a92c"
-  integrity sha512-gVfq0R/yRHoYTUGy2s4ZPFzkshzsFcRb+taTmAs/0Q3BpIB+OUDcPKHebTSt8TM54WFqcCQksJO6MqOUkwiPDw==
+  version "2.14.2"
+  resolved "https://registry.npmmirror.com/daisyui/-/daisyui-2.14.2.tgz#be36e1c9687b985288b15246029ee2c3d4f48425"
+  integrity sha512-/FxRBLC/xydIqxv+EJHfmmH+UndrwcaAxbWsS/oVLnoeOdb4MN4VlkJ3sYOYrl3tmw/D1L5Lp0PK07ebY0O6QA==
   dependencies:
     color "^4.2"
     css-selector-tokenizer "^0.8.0"
@@ -2172,12 +2132,14 @@ escape-string-regexp@^5.0.0:
   integrity sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==
 
 eslint-plugin-vue@^8.6.0:
-  version "8.6.0"
-  resolved "https://registry.npmmirror.com/eslint-plugin-vue/-/eslint-plugin-vue-8.6.0.tgz#fbdf0f13f8d208a4cba752bf54042661a1aec5c3"
-  integrity sha512-abXiF2J18n/7ZPy9foSlJyouKf54IqpKlNvNmzhM93N0zs3QUxZG/oBd3tVPOJTKg7SlhBUtPxugpqzNbgGpQQ==
+  version "8.7.1"
+  resolved "https://registry.npmmirror.com/eslint-plugin-vue/-/eslint-plugin-vue-8.7.1.tgz#f13c53547a0c9d64588a675cc5ecc6ccaf63703f"
+  integrity sha512-28sbtm4l4cOzoO1LtzQPxfxhQABararUb1JtqusQqObJpWX2e/gmVyeYVfepizPFne0Q5cILkYGiBoV36L12Wg==
   dependencies:
     eslint-utils "^3.0.0"
     natural-compare "^1.4.0"
+    nth-check "^2.0.1"
+    postcss-selector-parser "^6.0.9"
     semver "^7.3.5"
     vue-eslint-parser "^8.0.1"
 
@@ -2207,11 +2169,11 @@ eslint-visitor-keys@^3.1.0, eslint-visitor-keys@^3.3.0:
   integrity sha512-mQ+suqKJVyeuwGYHAdjMFqjCyfl8+Ldnxuyp3ldiMBFKkvytrXUZWaiPCEav8qDHKty44bD+qV1IP4T+w+xXRA==
 
 eslint@^8.13.0:
-  version "8.13.0"
-  resolved "https://registry.npmmirror.com/eslint/-/eslint-8.13.0.tgz#6fcea43b6811e655410f5626cfcf328016badcd7"
-  integrity sha512-D+Xei61eInqauAyTJ6C0q6x9mx7kTUC1KZ0m0LSEexR0V+e94K12LmWX076ZIsldwfQ2RONdaJe0re0TRGQbRQ==
+  version "8.14.0"
+  resolved "https://registry.npmmirror.com/eslint/-/eslint-8.14.0.tgz#62741f159d9eb4a79695b28ec4989fcdec623239"
+  integrity sha512-3/CE4aJX7LNEiE3i6FeodHmI/38GZtWCsAtsymScmzYapx8q1nVVb+eLcLSzATmCPXw5pT4TqVs1E0OmxAd9tw==
   dependencies:
-    "@eslint/eslintrc" "^1.2.1"
+    "@eslint/eslintrc" "^1.2.2"
     "@humanwhocodes/config-array" "^0.9.2"
     ajv "^6.10.0"
     chalk "^4.0.0"
@@ -2697,9 +2659,9 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, 
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
 gsap@^3.9.1:
-  version "3.10.3"
-  resolved "https://registry.npmmirror.com/gsap/-/gsap-3.10.3.tgz#368f03123ae4f9e48fe9c8912a6a92ba31c56194"
-  integrity sha512-O4P5mC6awoo0uSemZ1kS1Nm52I4/3gC8gy6ws6VFXvR1KmA4oRlBY/ZI4+LWsH0MoSDZrpwNyF9FAkB37UTGVg==
+  version "3.10.4"
+  resolved "https://registry.npmmirror.com/gsap/-/gsap-3.10.4.tgz#db89a6b8f6d5cb76e274eae822cbc1aa4d31e88f"
+  integrity sha512-6QatdkKxXCMfvCW4rM++0RqyLQAzFX5nwl3yHS0XPgkZBkiSEY3VZVbMltrdtsbER/xZonLtyHt684wRp4erlQ==
 
 gzip-size@^7.0.0:
   version "7.0.0"
@@ -3842,11 +3804,11 @@ nuxt-lodash@^2.1.1:
     lodash-es "^4.17.21"
 
 nuxt-windicss@^2.2.5:
-  version "2.3.0"
-  resolved "https://registry.npmmirror.com/nuxt-windicss/-/nuxt-windicss-2.3.0.tgz#7a9bb33a560b72563cabecb75c1ebcdc65ad29ab"
-  integrity sha512-7r+iCGyAGwbwlpumUgKxwxsmF4IMjwf+1gtSBvMLkdPssjW33nrhlkAYDBlRe3Uhv9J0UVLwXaRfeg0fKsPYHA==
+  version "2.3.1"
+  resolved "https://registry.npmmirror.com/nuxt-windicss/-/nuxt-windicss-2.3.1.tgz#b666ade7140e70d782ed15de46e453d5a5efd96b"
+  integrity sha512-GQmy0U/FYzJ5l8aTt6JQtpQ2GWbhoQk1DRmjVYx9AHNyJKyy/MHhNpoJ/cPrMQdOAVQRzmGJOl+VFH8uBNkbaA==
   dependencies:
-    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
+    "@nuxt/kit" "^3.0.0-rc.1"
     "@windicss/plugin-utils" "^1.8.4"
     consola "^2.15.3"
     defu "^6.0.0"

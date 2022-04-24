@@ -2,7 +2,7 @@
   <div
     ref="targetImg"
     :style="styleConfig"
-    class="relative bg-center bg-cover bg-no-repeat"
+    class="bg-center bg-cover bg-no-repeat"
   >
     <!-- partten -->
     <div class="bg-hero-texture w-full h-full" v-show="partten"></div>

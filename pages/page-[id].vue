@@ -28,9 +28,9 @@
         </div>
 
         <!-- titie -->
-        <div class="w-full pt-64px">
+        <div class="relative w-full pt-64px">
           <!-- head img -->
-          <div class="w-768px h-320px mx-auto">
+          <div class="w-768px h-320px mx-auto rounded-xl overflow-hidden">
             <potato-img :src="pageInfo.cover" loading-icon></potato-img>
           </div>
 

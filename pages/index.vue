@@ -76,7 +76,7 @@
     </div>
 
     <!-- main content -->
-    <div class="w-1180px mx-auto flex flex-row items-start">
+    <div class="max-w-1180px mx-auto flex flex-row items-start">
       <!-- left -->
       <div class="w-[70%] grid grid-cols-1 gap-y-8">
         <potato-page-card

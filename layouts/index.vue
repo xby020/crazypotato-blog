@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full">
-    <div class="navbar">
+    <div class="navbar p-0">
       <!-- logo -->
       <div class="navbar-start">
         <div
@@ -15,16 +15,19 @@
       </div>
 
       <!-- menu -->
-      <div class="navbar-center">
-        <ul class="menu menu-horizontal p-0">
-          <!-- Top menu -->
-          <li v-for="(m, mIndex) in menu" :key="mIndex">
-            <h2 class="flex flex-row justify-center">
-              <potato-icon :type="m.menuIcon"></potato-icon>
-              {{ m.menuName }}
-            </h2>
-          </li>
-        </ul>
+      <div
+        class="navbar-center flex flex-row justify-center items-center h-64px"
+      >
+        <button
+          v-for="(m, mIndex) in menu"
+          :key="mIndex"
+          class="h-full flex flex-row justify-center items-center px-2 transform duration-100 ease-in-out hover:bg-dark-50"
+        >
+          <potato-icon :type="m.menuIcon" size="18"></potato-icon>
+          <span class="mx-2 text-center align-middle font-serif">{{
+            m.menuName
+          }}</span>
+        </button>
       </div>
 
       <div class="navbar-end">
