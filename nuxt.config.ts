@@ -4,7 +4,14 @@ export default defineNuxtConfig({
   typescript: {
     strict: true
   },
-  modules: ['nuxt-lodash', 'nuxt-windicss', '@vueuse/nuxt'],
+  modules: [
+    'nuxt-lodash',
+    'nuxt-windicss',
+    '@vueuse/nuxt',
+    // pinia [https://pinia.vuejs.org/ssr/nuxt.html#installation]
+    '@nuxtjs/composition-api/module',
+    '@pinia/nuxt'
+  ],
   lodash: {
     prefix: 'useLodash'
   },
