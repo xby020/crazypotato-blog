@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     'nuxt-windicss',
     '@vueuse/nuxt',
     // pinia [https://pinia.vuejs.org/ssr/nuxt.html#installation]
-    '@nuxtjs/composition-api/module',
     '@pinia/nuxt'
   ],
   lodash: {
